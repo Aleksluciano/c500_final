@@ -1,0 +1,41 @@
+ID: c500
+_schema-version: '2.1'
+version: 0.0.2
+modules:
+  - name: c500_server
+    type: nodejs
+    path: c500_server
+    parameters:
+      memory: 512M
+      disk-quota: 256M
+    provides:
+      - name: c500_server_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: UAA-service
+      - name: CROSS_SCHEMA
+  - name: c500_ui
+    type: html5
+    path: c500_ui
+    requires:
+      - name: UAA-service
+      - name: ui5Broker
+      - name: c500_server_api
+        group: destinations
+        properties:
+          name: core-backend
+          url: '~{url}'
+          forwardAuthToken: true
+resources:
+  - name: UAA-service
+    type: com.sap.xs.uaa-space
+  - name: ui5Broker
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: sapui5_sb
+      service-plan: sapui5-1.71
+  - name: CROSS_SCHEMA
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: CROSS_SCHEMA

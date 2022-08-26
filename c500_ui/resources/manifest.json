@@ -1,0 +1,26 @@
+{
+	"sap.app": {
+		"id": "C500_Adj",
+		"applicationVersion": {
+			"version": "1.0.0"
+		}
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "App.Page",
+			"type": "XML",
+			"async": true
+		},
+		"dependencies": {
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {}
+			}
+		},
+		"resources":{
+			"css":[{
+				"uri": "css/style.css"
+			}]
+		}
+	}
+}

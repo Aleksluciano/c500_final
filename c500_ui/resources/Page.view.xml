@@ -1,0 +1,64 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout" displayBlock="true"
+	controllerName="App.Page">
+	<Shell>
+		<App>
+			<pages>
+				<Page title="C500" titleLevel="H1" showHeader="true" class="sapUiContentPadding">
+					<Panel width="auto" class="sapUiResponsiveMargin">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="Filtro"/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<content >
+							<HBox justifyContent="SpaceAround">
+								<VBox>
+									<Label text="*Empresa" labelFor="input-company"/>
+									<Select change=".changeCompany()" id="input-company" forceSelection="false" selectedKey="{/SelectedCompany}"
+										items="{ path: '/CompanyCollection', sorter: { path: 'Name' } }">
+										<core:Item key="{Id}" text="{Name}"/>
+									</Select>
+								</VBox>
+								<VBox>
+									<Label text="*De Estab" labelFor="input-branch"/>
+									<Select id="input-brancha" forceSelection="false" selectedKey="{/SelectedBranch}"
+										items="{ path: '/BranchCollection', sorter: { path: 'Name' } }">
+										<core:Item key="{Id}" text="{Name}"/>
+									</Select>
+								</VBox>
+								<VBox>
+									<Label text="*Até Estab" labelFor="input-branch"/>
+									<Select id="input-branchz" forceSelection="false" selectedKey="{/SelectedBranch2}"
+										items="{ path: '/BranchCollection2', sorter: { path: 'Name' } }">
+										<core:Item key="{Id}" text="{Name}"/>
+									</Select>
+								</VBox>
+								<VBox>
+									<Label text='*Período' labelFor="DP10"/>
+									<DatePicker id="DP10" value="{/SelectedPeriod}" displayFormat="MM-y" change="handleChange" class="sapUiSmallMarginBottom disabled" />
+								</VBox>
+								<l:VerticalLayout class="sapUiContentPadding" width="100%">
+									<l:dependents>
+										<core:Fragment fragmentName="App.BusyDialog" type="XML"/>
+									</l:dependents>
+								</l:VerticalLayout>
+							</HBox>
+						</content>
+					</Panel>
+					<Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
+						<List id="list" headerText="Registros processados" items="{ path: '/Results' }">
+							<StandardListItem title="{NF_ID} / {EMPRESA} / {FILIAL} / {DT_E_S}" counter="{item}" description="VL_TOTAL_DOCUMENTO: {VL_TOTAL_DOCUMENTO} - VL_FORN: {VL_FORN}" icon="sap-icon://accept" iconInset="true"
+								highlight="Success" info="Processado" infoState="Success"/>
+						</List>
+					</Panel>
+					<footer>
+						<OverflowToolbar>
+							<ToolbarSpacer/>
+							<Button type="Emphasized" text="Gerar" press="onPress"/>
+						</OverflowToolbar>
+					</footer>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

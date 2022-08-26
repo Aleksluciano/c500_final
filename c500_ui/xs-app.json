@@ -1,0 +1,37 @@
+{
+	"welcomeFile": "index.html",
+	"authenticationMethod": "route",
+	"routes": [{
+		"source": "/node(.*)",
+		"destination": "core-backend",
+		"csrfProtection": true,
+		"authenticationType": "xsuaa"
+	}, 
+	{
+		"source": "/data(.*)",
+		"destination": "core-backend",
+		"csrfProtection": true,
+		"authenticationType": "xsuaa"
+	},
+		{
+		"source": "/change(.*)",
+		"destination": "core-backend",
+		"csrfProtection": false,
+		"authenticationType": "xsuaa"
+	},
+	{
+		"source": "/(.*)",
+		"localDir": "resources",
+		"authenticationType": "xsuaa",
+		"replace": {
+			"pathSuffixes": [
+				"index.html"
+			],
+			"services": {
+				"sapui5_sb": {
+					"tag": "ui5"
+				}
+			}
+		}
+	}]
+}
